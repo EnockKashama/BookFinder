@@ -1,0 +1,28 @@
+# --- Secrets (NEVER commit these) ---
+
+.env
+.env.local
+
+# --- Node ---
+node_modules/
+npm-debug.log*
+
+# --- react Native / Expo ---
+-expo/
+dist/
+*.jks
+*.keystore
+
+# --- macOS ---
+.DS_Store
+
+# --- IDE ---
+.vscode/
+.idea/
+
+# --- Terraform ---
+*.tfstate
+*.tfstate.backup
+.terraform/
+*.tfvars
+
