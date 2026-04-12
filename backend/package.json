@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
-  "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js",
-    "lint": "eslint src/"
-  },
+ "scripts": {
+  "dev": "nodemon src/server.js",
+  "start": "node src/server.js",
+  "lint": "node --check src/app.js src/server.js src/routes/books.js src/routes/listings.js src/routes/users.js src/db/index.js src/db/knexfile.js"
+},
 "dependencies": {
   "cors": "^2.8.5",
   "dotenv": "^16.4.5",
