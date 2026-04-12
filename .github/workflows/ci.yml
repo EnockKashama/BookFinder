@@ -48,15 +48,21 @@ jobs:
 
       - name: Start containers
         working-directory: backend
-        run: |
-          docker compose up -d --build
-          echo "Waiting for API to be ready..."
-          sleep 15
+        run: docker compose up -d --build
 
-      - name: Health check
+      - name: Wait for API to be ready
         run: |
-          curl --fail http://localhost:3000/health
-          echo "Health check passed!"
+          echo "Waiting for API..."
+          for i in $(seq 1 30); do
+            if curl --silent --fail http://localhost:3000/health; then
+              echo "API is ready!"
+              exit 0
+            fi
+            echo "Attempt $i failed, waiting 5 seconds..."
+            sleep 5
+          done
+          echo "API failed to start after 150 seconds"
+          exit 1
 
       - name: Test listings endpoint
         run: |
