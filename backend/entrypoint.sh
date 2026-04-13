@@ -2,7 +2,7 @@
 set -e
 
 echo "Running database migrations..."
-npx knex migrate:latest --knexfile src/db/knexfiles.js
+node_modules/.bin/knex migrate:latest --knexfile src/db/knexfile.js
 
-echo "Statring BookFinder API..."
+echo "Starting BookFinder API..."
 exec node src/server.js
