@@ -61,7 +61,8 @@ jobs:
             echo "Attempt $i failed, waiting 5 seconds..."
             sleep 5
           done
-          echo "API failed to start after 150 seconds"
+          echo "API failed to start - printing container logs:"
+          docker compose -f backend/docker-compose.yml logs
           exit 1
 
       - name: Test listings endpoint
