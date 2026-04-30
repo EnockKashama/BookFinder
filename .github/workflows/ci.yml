@@ -115,8 +115,9 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Login to ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+        run: |
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | \
+          docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY_URI }}
 
       - name: Build and push image to ECR
         working-directory: backend
@@ -124,7 +125,6 @@ jobs:
           IMAGE_URI=${{ secrets.ECR_REPOSITORY_URI }}:${{ github.sha }}
           docker build -t $IMAGE_URI .
           docker push $IMAGE_URI
-          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1
