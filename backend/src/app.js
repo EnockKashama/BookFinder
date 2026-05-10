@@ -17,7 +17,7 @@ app.use(express.json())  // parse JSON request bodies
 app.get(
     '/health',
     (req,
-     res) => {res.json({status: 'ok', timestamp: new Date().toISOString()})})
+     res) => {res.json({status: 'ok', version: '1.0.0', timestamp: new Date().toISOString()})})
 
 // Routes
 app.use('/api/books', booksRouter)
